@@ -10,6 +10,9 @@
 
 export default {
 	async fetch(request, env, ctx) {
-		return new Response("Hello World!");
+		const users = await env.security_lab_db
+			.prepare("SELECT id, username, role FROM users")
+			.all();
+	return Response.json(users);
 	},
 };
